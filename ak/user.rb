@@ -15,7 +15,7 @@ class User
     @info["time_to_offense_guts_max"] = nil
     @info["time_to_energy_max"] = nil
   end
-
+  
   def fetch_info
     request = @core.request("/app.php?_c=entry&action=mypage", {}, "获取用户信息...")
     json_string = request[:raw][/user = ({.*})/, 1]

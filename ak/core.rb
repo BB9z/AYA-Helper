@@ -13,6 +13,7 @@ require_relative 'merge.rb'
 require_relative 'monster.rb'
 require_relative 'page_router.rb'
 require_relative 'request.rb'
+require_relative 'team.rb'
 require_relative 'user.rb'
 
 class AK
