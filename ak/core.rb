@@ -54,7 +54,7 @@ class AK
     
     
     begin
-      while interactive_home
+      while menu_home
       end
     rescue Interrupt => e
       puts "> 用户终止\n#{e.backtrace.first}"

@@ -3,7 +3,7 @@
 class AK
   
   # 主菜单
-  def interactive_home
+  def menu_home
     clear_screen
     say "<%= color('  -- AK 辅助系统 --  ', :bold, :white, :on_red) %>\n"
     
@@ -29,11 +29,11 @@ class AK
       }
       
       menu.choices("卡组管理") {
-        interactive_team
+        menu_team
       }
       
       menu.choices("挂机模式") {
-        interactive_auto
+        menu_auto
       }
 
       menu.choices("合并材料卡") {
@@ -49,7 +49,7 @@ class AK
       }
       
       menu.choices("设置") {
-        interactive_setting
+        menu_setting
       }
       
       menu.choices("重启") {
@@ -63,7 +63,7 @@ class AK
   end
   
   # 卡组管理
-  def interactive_team
+  def menu_team
     clear_screen
     
     choose do |menu|
@@ -74,14 +74,14 @@ class AK
       
       menu.choices("攻击组查看") {
         ids = get_offense_team
-        interactive_team_management(ids)
+        menu_team_management(ids)
       }
       menu.choices("防御组查看") {
       }
     
       menu.choices("设置攻击组") {
-        log "设置中，请稍后"
-        interactive_team_picker {|ids|
+        menu_team_picker {|ids|
+          log "设置中，请稍后..."
           set_offense_team(ids)
           puts "攻击组已更新"
           pause
@@ -121,9 +121,8 @@ class AK
   end
   
   # 选择队伍
-  def interactive_team_picker(&block)
+  def menu_team_picker(&block)
     raise(ArgumentError, "必须有回调") if !block_given?
-    clear_screen
     
     choose {|menu|
       menu.header = "选择队伍"
@@ -152,7 +151,7 @@ class AK
   end
   
   # 管理当前显示的队伍
-  def interactive_team_management(ids = [])
+  def menu_team_management(ids = [])
     choose do |menu|
       menu.header = ">> 卡组管理"
       menu.prompt = "输入操作序号，然后按回车"
@@ -189,7 +188,7 @@ class AK
   end
   
   # 挂机模式
-  def interactive_auto
+  def menu_auto
     clear_screen
     
     choose do |menu|
@@ -213,7 +212,7 @@ class AK
   end
   
   # 设置
-  def interactive_setting
+  def menu_setting
     clear_screen
     
     choose {|menu|
