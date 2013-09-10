@@ -86,7 +86,7 @@ class AK
   end
   
   def sound_alert(string)
-    say(string) if @sound_alert
+    speak(string) if @sound_alert
   end
   
   def farm(island_id = 3, area_id = 8, stage_id = 11)

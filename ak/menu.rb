@@ -5,7 +5,7 @@ class AK
   # 主菜单
   def interactive_home
     clear_screen
-    $terminal.say "<%= color('  -- AK 辅助系统 --  ', :bold, :white, :on_red) %>\n"
+    say "<%= color('  -- AK 辅助系统 --  ', :bold, :white, :on_red) %>\n"
     
     choose do |menu|
       menu.header = "请选择操作"

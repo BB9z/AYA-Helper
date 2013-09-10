@@ -14,7 +14,7 @@ module Kernel
     print "\a"
   end
   
-  def say(string)
+  def speak(string)
     Thread.new {
       system("say #{string}")
     }

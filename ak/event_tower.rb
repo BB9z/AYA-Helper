@@ -228,7 +228,7 @@ class EventTower
     
       when "NO_ENOUGH_ENERGY"
         log "体力消耗光了"
-        say("NO ENOUGH ENERGY")
+        speak("NO ENOUGH ENERGY")
         @item_flag = 0
         exit unless @auto_mode
     
@@ -253,7 +253,7 @@ class EventTower
 
       when "LEVEL_UP"
         log "升级了～"
-        say("LEVEL UP")
+        speak("LEVEL UP")
 
       else
         log "未处理的类别 #{event}"
@@ -360,9 +360,9 @@ class EventTower
       end
       
       @core.set_offense_team(info["team"])
-      say("Fight")
+      speak("Fight")
     else
-      say("Ready fight?")
+      speak("Ready fight?")
       @core.pause("按任意键开打")
     end
     
@@ -392,12 +392,12 @@ class EventTower
     
     if html[/id="tit-won"/].nil?
       log "战斗失败"
-      say("You lost")
+      speak("You lost")
       return false
       
     else
       log "战斗胜利"
-      say("You win")
+      speak("You win")
       return true
       
     end

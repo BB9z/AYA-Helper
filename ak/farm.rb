@@ -44,7 +44,7 @@ class Farm
       case event["type"]
       when "NO_ENOUGH_ENERGY"
         log "体力消耗光了"
-        say("NO ENOUGH ENERGY")
+        speak("NO ENOUGH ENERGY")
     
       when "GET_MONSTER"      
         monster = event["values"]["settings"]["monster"]
@@ -68,11 +68,11 @@ class Farm
     
       when "LEVEL_UP"
         log "升级了～"
-        say("LEVEL UP")
+        speak("LEVEL UP")
     
       else
         log "未处理的类别 #{event["type"]}"
-        say("Unknow type")
+        speak("Unknow type")
       end
     }
   end
