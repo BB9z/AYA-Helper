@@ -43,18 +43,11 @@ class AK
         pause
       }
     
-      menu.choices("列印被保护卡牌") {
+      menu.choices("查看卡牌") {
         clear_screen
-        list_protected_monster
-        pause
+        menu_list_monster
       }
       
-      menu.choices("列印所有卡牌") {
-        clear_screen
-        list_all_monster
-        pause
-      }
-
       menu.choice("返回") {
       }
     end

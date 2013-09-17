@@ -52,48 +52,92 @@ class AK
   
   attr_accessor :monsters_cache
   
-  # 打印被保护式神
-  def list_protected_monster
-    begin
-      log "获取式神数据..."
-      protected_monsters = fetch_monsters.select {|item|
-        item.is_not_use_material
-      }
-      log "被保护式神共计 #{protected_monsters.count}"
+  # 卡组管理
+  def menu_list_monster
+    clear_screen
     
-      protected_monsters.each {|item|
+    choose do |menu|
+      menu.header = "卡组管理 >> 列打印卡牌"
+      menu.character = true
+      menu.echo = false
+      menu.prompt = "请输入类型序号"
+      
+      menu.choices("所有卡牌") {
+        clear_screen
+        list_all_monster
+        pause
+      }
+      
+      menu.choices("被保护卡牌") {
+        clear_screen
+        list_protected_monster
+        pause
+      }
+      
+      menu.choices("降妖防") {
+        clear_screen
+        list_monster(2) {|item|
+          item.skill_description["降低敵方妖魔防禦力"]
+        }
+        pause
+      }
+      
+      menu.choices("降神防") {
+        clear_screen
+        list_monster(2) {|item|
+          item.skill_description["降低敵方神靈防禦力"]
+        }
+        pause
+      }
+      
+      menu.choices("降99防") {
+        clear_screen
+        list_monster(2) {|item|
+          item.skill_description["降低敵方九十九神防禦力"]
+        }
+        pause
+      }
+
+      menu.choice("返回") {
+      }
+    end
+  end
+  
+  
+  def list_monster(display_style = 1, &filter_block)
+    filter_block = Proc.new {|_item| true} unless filter_block
+    
+    begin
+      monsters = fetch_monsters.select(&filter_block)
+      log "符合条件的式神共计 #{monsters.count}"
+    
+      monsters.each {|item|
         # p item
-        puts item.to_s
+        puts item.to_s(display_style)
       }
   
     rescue => e
       p e.inspect
       puts e.backtrace
     end
-
+  end
+  
+  # 打印被保护式神
+  def list_protected_monster
+    list_monster(1) {|item|
+        item.is_not_use_material
+    }
   end
   
   # 打印所有式神
   def list_all_monster
-    begin
-      log "获取式神数据..."
-      monsters = fetch_monsters
-      monsters.each {|item|
-        puts item.to_s(2)
-      }
-      log "式神共计 #{monsters.count}"
-  
-    rescue => e
-      p e.inspect
-      puts e.backtrace
-    end
-
+    list_monster(2)
   end
   
   # 获取式神数据
   # 返回数组，元素是 AKMonster
   def fetch_monsters
-    json = request( "/app.php?_c=monster&action=jsonlist&list_type=all&order_by=rarity-desc")[:json]
+    json = request( "/app.php?_c=monster&action=jsonlist&list_type=all&order_by=rarity-desc", nil,  "获取式神数据...")[:json]
     monsters = json["monsters"]
     
     monsters.map! {|item|
