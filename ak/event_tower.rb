@@ -26,7 +26,7 @@ class EventTower
     raise if !master
     
     @core = master
-    @evid = 27
+    @evid = 28
     @island_id = 1
     @item_flag = 0
     
@@ -34,118 +34,168 @@ class EventTower
     
     @encounter_battle_rule = {
       "10821" => {
-        "name" => "洲際彈道飛彈",
-        "defense" => 12523,
+        "name" => "兔子兵",
+        "defense" => 10523,
         "resign" => true,
-        "team" => [199, 7349, 1161, 3291, 10092],
+        "team" => [],
         "guts" => 36
       },
       "10822" => {
-        "name" => "希費斯特斯",
+        "name" => "竹林",
         "defense" => 13422,
         "resign" => true,
-        "team" => [10330, 7349, 10091, 10089, 10123],
+        "team" => [],
         "guts" => 42
       },
       "10823" => {
-        "name" => "卡利",
+        "name" => "兔子火箭筒",
         "defense" => 29295,
         "resign" => true,
-        "team" => [4371, 3834, 7349, 3291, 1116],
-        "guts" => 79
+        "team" => [3834, 2871, 7349, 10092, 10057],
+        "guts" => 63
       },
       "10824" => {
-        "name" => "忠勝的蜻蛉切",
-        "defense" => 29295,
+        "name" => "流浪的吉他手",
+        "defense" => 41983,
         "resign" => true,
-        "team" => [8404, 3834, 7349, 3291, 1116],
+        "team" => [8404, 3834, 7349, 10092, 10057],
         "guts" => 76
       },
       "10825" => {
-        "name" => "奇稻田公主",
+        "name" => "大納言大伴御行",
         "defense" => 54124,
         "resign" => false,
-        "team" => [8392, 2718, 8404, 3834, 7349],
-        "guts" => 134
+        "team" => [10614, 8404, 3834, 3535, 7349],
+        "guts" => 117
       },
       "10826" => {
-        "name" => "建御雷神",
+        "name" => "蓬萊的玉之枝",
         "defense" => 80000,
         "resign" => false,
-        "team" => [8392, 6597, 2718, 8404, 3834],
-        "guts" => 157
+        "team" => [2718, 8404, 3834, 10823, 3774],
+        "guts" => 152
       },
       "10827" => {
-        "name" => "多管火箭發射系統",
-        "defense" => 115000,
+        "name" => "超級滿月",
+        "defense" => 138000,
         "resign" => false,
-        "team" => [2718, 8404, 3834, 3833, 3774],
+        "team" => [],
         "guts" => 153
       },
       "10828" => {
-        "name" => "米蘭達",
-        "defense" => 138000,
+        "name" => "時之帝",
+        "defense" => 142000,
         "resign" => false,
-        "team" => [2718, 8404, 3834, 3833, 3774],
+        "team" => [],
         "guts" => 153
       }
     }
     
+    # 兔子
+    # 3834 10823 10057 7349 3291
+    
+    # 吉他
+    # 8404 3834 10823 10057 7349
+    
+    329751814
+    
     @battle_rule = {
+      "70" => {
+        "name" => "稚鳥",
+        "defense" => 6477,
+        "team" => [7349, 10092, 10057, 1116, 3291],
+        "guts" => 30
+      },
+      "75" => {
+        "name" => "稚鳥",
+        "defense" => 12165,
+        "team" => [2871, 7349, 10092, 10057, 1116],
+        "guts" => 41
+      },
+      "80" => {
+        "name" => "桃太郎",
+        "defense" => 1500,
+        "team" => [7349, 10092, 10057, 1116, 3291],
+        "guts" => 41
+      },
+      "85" => {
+        "name" => "桃太郎",
+        "defense" => 2211,
+        "team" => [],
+        "guts" => 0
+      },
+      "90" => {
+        "name" => "桃太郎",
+        "defense" => 3633,
+        "team" => [],
+        "guts" => 0
+      },
+      "95" => {
+        "name" => "桃太郎",
+        "defense" => 6477,
+        "team" => [],
+        "guts" => 0
+      },
+      "100" => {
+        "name" => "桃太郎",
+        "defense" => 12165,
+        "team" => [10330, 7349, 10092, 10057, 1116],
+        "guts" => 48
+      },
       "110" => {
-        "name" => "八岐大蛇",
+        "name" => "讃岐造",
         "defense" => 3200,
         "team" => [7349, 1116, 3291, 10092, 10057],
         "guts" => 30
       },
       "120" => {
-        "name" => "八岐大蛇",
+        "name" => "讃岐造",
         "defense" => 4716,
         "team" => [7349, 1116, 3291, 10092, 10057],
         "guts" => 30
       },
       "130" => {
-        "name" => "八岐大蛇",
+        "name" => "讃岐造",
         "defense" => 7748,
         "team" => [7349, 1116, 3291, 10092, 10057],
         "guts" => 30
       },
       "140" => {
-        "name" => "八岐大蛇",
+        "name" => "讃岐造",
         "defense" => 13812,
         "team" => [3832, 7349, 1161, 3291, 10092],
         "guts" => 41
       },
       "150" => {
-        "name" => "八岐大蛇",
+        "name" => "讃岐造",
         "defense" => 32000,
         "team" => [1365, 4371, 8400, 10123, 10089],
         "guts" => 45
       },
       "160" => {
-        "name" => "衛星加農炮",
+        "name" => "月兔姫",
         "defense" => 4800,
         "team" => [7349, 1116, 3291, 10092, 10057],
         "guts" => 30
       },
       "170" => {
-        "name" => "衛星加農炮",
+        "name" => "月兔姫",
         "defense" => 7074,
         "team" => [7349, 1116, 3291, 10092, 10057],
         "guts" => 30
       },
       "180" => {
-        "name" => "衛星加農炮",
+        "name" => "月兔姫",
         "defense" => 11622,
-        "team" => [199, 7349, 1161, 3291, 10092],
+        "team" => [8404, 7349, 1161, 3291, 10092],
         "guts" => 36
       },
       "190" => {
-        "name" => "衛星加農炮",
+        "name" => "月兔姫",
         "defense" => 20718
       },
       "200" => {
-        "name" => "衛星加農炮",
+        "name" => "月兔姫",
         "defense" => 48000
       }
     }
@@ -154,13 +204,14 @@ class EventTower
   # 更新楼层状态
   # 返回是否更新成功
   def update_stage_info
-    response = @core.request("/app.php?evid=#{@evid}&_c=extra_quest_event_adventure&action=stage", {}, "获取状态...")
+    response = @core.request("/app.php?evid=#{@evid}&newest=1&_c=ExtraQuestEventAdventure&action=stage", {}, "获取状态...")
     
     body = response[:raw]
     html = response[:html]
     
     case html.title
-    when "extra_quest_event_adventure stage - ayakashi"
+    when "ExtraQuestEventAdventure stage - ayakashi"
+      p html
       @stage = html.css("#stage-name").first.content.to_i
       log "当前处于 #{@stage} 层"
   
@@ -209,6 +260,7 @@ class EventTower
   
   # 返回为 false 表明操作需进一步干预
   def investigate()
+    
     json = @core.request("/app.php?_c=extra_quest_event_adventure&action=proceed&evid=#{@evid}&newest=1", {
       "Accept" => 'application/json'
     })[:json]
@@ -363,7 +415,7 @@ class EventTower
       speak("Fight")
     else
       speak("Ready fight?")
-      @core.pause("按任意键开打")
+      pause("按任意键开打")
     end
     
     flag = @encounter_battle_mode? 1 : 0
