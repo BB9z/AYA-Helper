@@ -155,11 +155,11 @@ class AK
     if response[:raw][/<title>merge merge_bulk - ayakashi<\/title>/]
       html = response[:html]
       html.css('#level-up-text span.st').each {|tag|
-        print tag.content
+        print "#{tag.content} "
       }
       materialArray.count
     else
-      print "x"
+      print "x "
       0
     end
   end
