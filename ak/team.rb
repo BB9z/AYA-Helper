@@ -143,33 +143,46 @@ class AK
   
   # 设置攻击组
   def set_offense_team(members = [])
-    members ||= []
+    return if members.nil? || members.empty?
     
-    members.each_index {|ix|
-      if ix == 0
-        offense_team_reset
-      
-        set_team_leader members[ix]
-      else
-        add_to_offense_team(members[ix], 2)
-      end
-    }
+    offense_team_reset
+    add_to_offense_team(members, 2)
+    set_team_leader(members.first)
   end
   
   # 设为攻击组
   # 参数：id , 优先级
-  def add_to_offense_team(id, priority = 1)
-    id ||= -1
-    if id > 0
-       request "/app.php?_c=monster&action=setPriority&list_type=offense&inventory_monster_id=#{id}&priority=#{priority}"
+  def add_to_offense_team(id_or_ids, priority = 1)
+    return if id_or_ids.nil?
+    
+    log "设置优先级"
+    if id_or_ids.is_a?(Integer)
+      if id > 0
+         request("/app.php?_c=monster&action=setPriority&list_type=offense&inventory_monster_id=#{id}&priority=#{priority}")
+      end
+    elsif id_or_ids.is_a?(Array)
+      request = Net::HTTP::Post.new("/app.php?_c=monster&action=AttackBulk", {
+        "Accept-Language" => "zh-cn",
+        "Cookie" => @cookie,
+        "User-Agent" => @userAgent
+      })
+      request.set_form_data({
+        "_c" => "monster",
+        "action" => "AttackBulk",
+        "inventory_monster_ids" => id_or_ids * ","
+      })
+      response = @http.request(request)
+      p response
+      p response.body
+    else
+      raise(ArgumentError, "参数类型错误")
     end
-    nil
   end
   
   # 重置攻击组
   # 无返回
   def offense_team_reset
-    request("/app.php?_c=monster&action=resetPriority&list_type=offense")
+    request("/app.php?_c=monster&action=resetPriority&list_type=offense", nil, "重置攻击组")
     nil
   end
   
