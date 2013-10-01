@@ -35,6 +35,10 @@ class AK
       menu.choices("挂机模式") {
         menu_auto
       }
+      
+      menu.choices("耗尽模式") {
+        menu_one_way
+      }
 
       menu.choices("合并材料卡") {
         clear_screen
@@ -73,12 +77,48 @@ class AK
       menu.prompt = "请输入操作序号"
       
       menu.choice("自动211") {
-        auto_farm
+        clear_screen
+        log(">> 自动211")
+        fm = Farm.new(self)
+        fm.run
+        pause
       }
       
       menu.choice("自动爬塔") {
         et = EventTower.new(self)
         et.run(true)
+        pause
+      }
+      
+      menu.choice("返回") {}
+    end
+  end
+  
+  # 耗尽模式
+  def menu_one_way
+    clear_screen
+    
+    choose do |menu|
+      menu.header = ">> 耗尽模式"
+      menu.character = true
+      menu.echo = false
+      menu.prompt = "请输入操作序号"
+      
+      menu.choice("211至无体力") {
+        clear_screen
+        log(">> 211至无体力")
+        fm = Farm.new(self)
+        fm.one_way_mode = true
+        fm.farm_interval = 0
+        fm.run
+        pause
+      }
+      
+      menu.choice("爬塔至无体力") {
+        clear_screen
+        log(">> 爬塔至无体力")
+        et = EventTower.new(self)
+        et.run
         pause
       }
       

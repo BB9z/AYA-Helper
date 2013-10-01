@@ -52,7 +52,6 @@ class AK
       
     end
     
-    
     begin
       while menu_home
       end
@@ -81,17 +80,4 @@ class AK
   def sound_alert(string)
     speak(string) if @sound_alert
   end
-  
-  def farm(island_id = 3, area_id = 8, stage_id = 11)
-    fm = Farm.new(self)
-    fm.farm(island_id, area_id, stage_id)
-  end
-  
-  def auto_farm(time_interval = 60, count = 0)
-    time_interval ||= 60
-    
-    fm = Farm.new(self)
-    fm.auto_farm(time_interval, count)
-  end
-  
 end

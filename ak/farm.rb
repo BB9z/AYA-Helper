@@ -4,28 +4,46 @@ class AK
   
 class Farm
   
+  attr_accessor :one_way_mode
+  attr_accessor :farm_interval
+  
+  # <= 0 永久
+  attr_accessor :farm_count
+  
+  attr_reader :should_continue_run
+  attr_reader :is_running
+  
   def initialize(master)
     raise if !master
     
     @core = master
+    @one_way_mode = false
+    @farm_interval = 60
+    @farm_count = -1
+    
   end
   
-  # count ，为 0 或不提供默认永久
-  def auto_farm(time_interval = 60, count = 0)
-    count = -1 if count.nil? || count <= 0
+  def run
+    return if @is_running
+    
+    @is_running = true
+    @should_continue_run = true
+    @farm_count = -1 if @farm_count.nil? || @farm_count <= 0
     
     begin
-      while true
+      while @should_continue_run
         farm
     
-        break if count == 0
-        count -= 1 if count > 0
+        break if @farm_count == 0
+        @farm_count -= 1 if @farm_count > 0
     
-        sleep(time_interval)
+        sleep(@farm_interval)
       end
     rescue Interrupt
       log "停止"
     end
+    
+    @is_running = false
   end
   
   def farm(island_id = 3, area_id = 8, stage_id = 11)
@@ -45,6 +63,7 @@ class Farm
       when "NO_ENOUGH_ENERGY"
         log "体力消耗光了"
         speak("NO ENOUGH ENERGY")
+        @should_continue_run = false if @one_way_mode
     
       when "GET_MONSTER"      
         monster = event["values"]["settings"]["monster"]
@@ -71,8 +90,9 @@ class Farm
         speak("LEVEL UP")
     
       else
-        log "未处理的类别 #{event["type"]}"
+        log "未处理的类别 #{event}"
         speak("Unknow type")
+        @should_continue_run = false if @one_way_mode
       end
     }
   end
