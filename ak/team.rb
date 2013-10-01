@@ -32,11 +32,6 @@ class AK
         log "设置中，请稍后"
         offense_team_reset
       }
-    
-      menu.choices("设置防御组") {
-        log "设置中，请稍后"
-        
-      }
       
       menu.choices("查看已保存的组队") {
         list_saved_team
@@ -157,8 +152,8 @@ class AK
     
     log "设置优先级"
     if id_or_ids.is_a?(Integer)
-      if id > 0
-         request("/app.php?_c=monster&action=setPriority&list_type=offense&inventory_monster_id=#{id}&priority=#{priority}")
+      if id_or_ids > 0
+         request("/app.php?_c=monster&action=setPriority&list_type=offense&inventory_monster_id=#{id_or_ids}&priority=#{priority}")
       end
     elsif id_or_ids.is_a?(Array)
       request = Net::HTTP::Post.new("/app.php?_c=monster&action=AttackBulk", {
@@ -171,9 +166,15 @@ class AK
         "action" => "AttackBulk",
         "inventory_monster_ids" => id_or_ids * ","
       })
-      response = @http.request(request)
-      p response
-      p response.body
+      
+      retry_count = 1
+      begin
+        @http.request(request)
+      rescue => e
+        retry if retry_count > 0
+        retry_count -= 1
+      end
+      
     else
       raise(ArgumentError, "参数类型错误")
     end
@@ -199,9 +200,7 @@ class AK
   def team_saved?(ids)
     raise(ArgumentError, "组队为空") if Array(ids).empty?
     
-    saved_teams = @user_default["team"]
-    saved_teams ||= []
-    
+    saved_teams = Array(@user_default["team"])
     saved_teams.each {|team|
       return true if team[:ids].eql?(ids)
     }
