@@ -13,13 +13,6 @@ class AK
       menu.echo = false
       menu.prompt = "请输入操作序号"
       menu.overwrite = true
-      
-      menu.choices("爬塔") {
-        clear_screen
-        et = EventTower.new(self)
-        et.run
-        pause
-      }
 
       menu.choice("用户信息查看") {
         clear_screen
@@ -85,6 +78,8 @@ class AK
       }
       
       menu.choice("自动爬塔") {
+        clear_screen
+        log(">> 自动爬塔")
         et = EventTower.new(self)
         et.run(true)
         pause

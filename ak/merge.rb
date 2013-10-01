@@ -46,12 +46,15 @@ class AK
     return @merge_rule if @merge_rule
     
     @merge_rule = MergeRule.new {
+      define( 89, 116, "反枕+黑曜石勾玉")
+      
       define3(89, "反枕")
       define3(91, "鐮鼬")
       define3(90, "鼠幫嘍囉")
 
       define(  2, 116, "管狐+黑曜石勾玉")
       define( 15, 116, "雪童子+黑曜石勾玉")
+      define(342, 113, "可樂小童+黑曜石勾玉")
       define(343, 116, "鳥身女妖+黑曜石勾玉")
     
       define( 90, 116, "鼠幫嘍囉+黑曜石勾玉")
@@ -77,6 +80,7 @@ class AK
       define(104, 119, "娜塔莉奈浮+電氣石勾玉")
       define(799, 119, "長髮公主的頭髮[夏]+電氣石勾玉")
       define(350, 119, "風車+電氣石勾玉")
+      define(355, 119, "戰輪+電氣石勾玉")
     }
   end
   
