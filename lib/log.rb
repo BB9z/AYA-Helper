@@ -1,3 +1,4 @@
+require 'io/console'
 
 module Kernel
   # 打印带时间的日志
@@ -20,4 +21,9 @@ module Kernel
     }
   end
   
+  def pause(promote = nil)
+    promote ||= "按任意键继续..."
+    print "#{promote}\n"
+    IO.console.getch
+  end
 end

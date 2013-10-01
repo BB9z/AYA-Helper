@@ -78,14 +78,6 @@ class AK
     end
   end
   
-  def pause(promote = nil)
-    promote ||= "按任意键继续..."
-    ask(promote) {|q|
-      q.echo = false
-      q.character = true
-    }
-  end
-  
   def sound_alert(string)
     speak(string) if @sound_alert
   end
