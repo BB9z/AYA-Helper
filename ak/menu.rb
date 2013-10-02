@@ -32,17 +32,9 @@ class AK
       menu.choices("耗尽模式") {
         menu_one_way
       }
-
-      menu.choices("合并材料卡") {
-        clear_screen
-        merge
-        pause
-      }
-
-      menu.choices("工会留言板") {
-        clear_screen
-        talk 5
-        pause
+      
+      menu.choices("其他") {
+        menu_others
       }
       
       menu.choices("设置") {
@@ -119,6 +111,35 @@ class AK
       
       menu.choice("返回") {}
     end
+  end
+  
+  def menu_others
+    clear_screen
+    
+    HighLine.choose {|menu|
+      menu.header = ">> 其他"
+      menu.character = true
+      menu.echo = false
+      menu.prompt = "请输入操作序号"
+
+      menu.choices("合并材料卡") {
+        clear_screen
+        merge
+        pause
+      }
+
+      menu.choices("工会留言板") {
+        clear_screen
+        talk 5
+        pause
+      }
+      
+      menu.choices("退出") {
+        exit
+      }
+      
+      menu.choice("返回") {}
+    }
   end
   
   # 设置
