@@ -17,6 +17,7 @@ class AK
         menu_team_management(ids)
       }
       menu.choices("防御组查看") {
+        
       }
     
       menu.choices("设置攻击组") {
@@ -103,10 +104,10 @@ class AK
         pause
       }
       
-      menu.choice("设置为当前防守组") {
-        clear_screen
-        log "设置中请稍后"
-      }
+      # menu.choice("设置为当前防守组") {
+      #   clear_screen
+      #   log "设置中请稍后"
+      # }
 
       menu.choice("返回") {
       }
@@ -135,6 +136,8 @@ class AK
     
     monster_ids
   end
+  
+  
   
   # 设置攻击组
   def set_offense_team(members = [])
@@ -191,7 +194,7 @@ class AK
   # 无返回
   def set_team_leader(id)
     id ||= -1
-    request("/app.php?inventory_monster_id=#{id}&_c=monster&action=setLeader", nil, nil, true) if id > 0
+    request("/app.php?inventory_monster_id=#{id}&_c=monster&action=setLeader", nil, "设置队长", true) if id > 0
     nil
   end
   
