@@ -103,7 +103,7 @@ class AK
     end
   end
   
-  
+  # 打印特定卡牌
   def list_monster(display_style = 1, &filter_block)
     filter_block = Proc.new {|_item| true} unless filter_block
     
@@ -117,9 +117,11 @@ class AK
       }
   
     rescue => e
-      p e.inspect
+      puts e.inspect
       puts e.backtrace
     end
+    
+    monsters
   end
   
   # 打印被保护式神

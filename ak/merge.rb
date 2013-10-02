@@ -4,6 +4,12 @@ class AK
   
   # 用材料式神喂被保护的式神
   def merge_up
+    monster = list_monster(1) {|item|
+        item.is_not_use_material && !item.max_level?
+    }
+    
+    restart
+    
     response = request("/app.php?_c=merge", {}, "请求式神数据...")[:raw]
   
     dataString = response[/materialMonsters\:\s+(\[.*\])/, 1]

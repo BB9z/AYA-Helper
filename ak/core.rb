@@ -4,6 +4,7 @@ require 'highline/import'
 require_relative '../lib/log.rb'
 
 require_relative 'event_tower.rb'
+require_relative 'event_pvp.rb'
 require_relative 'event.rb'
 require_relative 'farm.rb'
 require_relative 'guild.rb'

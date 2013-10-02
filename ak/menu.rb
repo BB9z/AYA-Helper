@@ -77,6 +77,14 @@ class AK
         pause
       }
       
+      menu.choice("自动乱斗") {
+        clear_screen
+        log(">> 自动乱斗")
+        et = EventPVP.new(self)
+        et.run
+        pause
+      }
+      
       menu.choice("返回") {}
     end
   end
@@ -125,6 +133,12 @@ class AK
       menu.choices("合并材料卡") {
         clear_screen
         merge
+        pause
+      }
+      
+      menu.choices("强化稀有被保护卡") {
+        clear_screen
+        merge_up
         pause
       }
 
