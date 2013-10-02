@@ -17,7 +17,6 @@ require_relative 'team.rb'
 require_relative 'user.rb'
 
 class AK
-  attr_reader :http
   attr_accessor :user_default
 
   def initialize(config = {})
@@ -30,13 +29,8 @@ class AK
     sound_alert("Welcome")
     raise unless @cookie
     
-    uri = URI.parse("http://zc2.ayakashi.zynga.com")
-  
     @userAgent = "Mozilla/5.0 (iPad; CPU OS 6_1 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Mobile/10B141 ZyngaBundleIdentifier/com.zynga.zjayakashi.0 ZyngaBundleVersion/1.9.0"
-  
-    @http = Net::HTTP.new(uri.host, uri.port)
-    # @http.set_debug_output $stderr
-    @http.read_timeout = 4
+    
     @cannot_merge_any_more = false
     
     user_info = @user_default[:user]

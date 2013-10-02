@@ -169,7 +169,7 @@ class AK
       
       retry_count = 1
       begin
-        @http.request(request)
+        self.http.request(request)
       rescue => e
         retry if retry_count > 0
         retry_count -= 1

@@ -4,12 +4,32 @@ require 'json'
 require 'nokogiri'
 
 class AK
-  attr_accessor(:cookie, :userAgent)
+  attr_accessor :cookie
+  attr_accessor :userAgent
+  attr_accessor :http
   
   class RequestError < StandardError  
   end
   
   class HTTPInternalServerError < StandardError  
+  end
+  
+  def http
+    if !@http
+      uri = URI.parse("http://zc2.ayakashi.zynga.com")
+      @http = Net::HTTP.new(uri.host, uri.port)
+      # @http.set_debug_output $stderr
+      @http.read_timeout = 4
+    end
+    
+    @http
+  end
+  
+  def http=(new_http)
+    if @http
+      @http.finish if @http.started?
+    end
+    @http = new_http
   end
   
   # 网络请求
@@ -26,7 +46,7 @@ class AK
       
       log "#{request_start_promte}" if request_start_promte
       
-      response = @http.request_get(uri, {
+      response = self.http.request_get(uri, {
         "Accept-Language" => "zh-cn",
         "Cookie" => @cookie,
         "User-Agent" => @userAgent
@@ -37,11 +57,11 @@ class AK
       
       raise HTTPInternalServerError if response.is_a? Net::HTTPInternalServerError
       
-    rescue SocketError, Errno::ENETUNREACH, Errno::EADDRNOTAVAIL
+    rescue SocketError, Errno::ENETUNREACH, Errno::EADDRNOTAVAIL, Errno::EHOSTUNREACH
       log "网络错误，重试"
       sleep(60)
       retry_count -= 1
-      @http.finish if @http.started?
+      self.http = nil
   
     rescue Errno::ETIMEDOUT, Net::ReadTimeout
       log "连接超时，重试"
@@ -55,13 +75,13 @@ class AK
       
     rescue HTTPInternalServerError
       sleep(60)
-      @http.finish if @http.started?
+      self.http = nil
       p response
       retry
       
     end # try
     
-    @http.finish if @http.started?
+    self.http.finish if self.http.started?
     
     if response.is_a? Net::HTTPFound
       uri = response["location"]
