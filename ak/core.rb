@@ -21,6 +21,8 @@ class AK
   attr_accessor :user_default
 
   def initialize(config = {})
+    Encoding.default_external = Encoding::UTF_8
+    
     @user_default = YAML.load_file("config.yml")
     @user_default ||= {}
     config = @user_default.merge(config)
