@@ -33,7 +33,7 @@ class AK
         menu_one_way
       }
       
-      menu.choices("其他") {
+      menu.choices("其他") { 
         menu_others
       }
       

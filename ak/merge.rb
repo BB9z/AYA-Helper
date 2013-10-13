@@ -4,40 +4,45 @@ class AK
   
   # 用材料式神喂被保护的式神
   def merge_up
-    monster = list_monster(1) {|item|
-        item.is_not_use_material && !item.max_level?
-    }
     
-    restart
+    begin
+      all_monsters = fetch_monsters
+      log "所有式神共计 #{all_monsters.count}"
     
-    response = request("/app.php?_c=merge", {}, "请求式神数据...")[:raw]
+      
+      monster_needs_upgrade = all_monsters.select {|m|
+        !m.max_level? && m.rarity >= 3 && m.is_not_use_material
+      }
+      
+      log "需要升级的"
+      monster_needs_upgrade.each {|item|
+        puts item.to_s(1)
+      }
+      
+      material_pool = all_monsters - monster_needs_upgrade
+      material_pool.select! {|m|
+        m.level >=5 && m.level <=8 && m.rarity < 3 && !m.is_not_use_material
+      }
+      log "式神共计 #{material_pool.count}"
+      
+      
+      
+      
+      exit
   
-    dataString = response[/materialMonsters\:\s+(\[.*\])/, 1]
-    json = JSON.parse(dataString)
-    log "式神共计 #{json.count}"
-    printMaterialArray(json)
-    exit
+    rescue => e
+      puts e.inspect
+      puts e.backtrace
+    end
   
   
-    monsters = json.map {|item| AKMonster.new(item)}
-  
-    up_monsters = monsters.select {|m|
-      !m.max_level? && m.rarity >= 3 && m.is_not_use_material
-    }
-    monsters -= up_monsters
-    p up_monsters
     
     monsters = monsters.sort {|a, b|
-      
-      
       if a.rarity != b.rarity
         return +1 if a.rarity > b.rarity
         return -1
       end
-      
-      
     }
-    
     
     return if up_monsters.empty?
   
@@ -52,8 +57,6 @@ class AK
     return @merge_rule if @merge_rule
     
     @merge_rule = MergeRule.new {
-      define( 89, 116, "反枕+黑曜石勾玉")
-      
       define3(89, "反枕")
       define3(91, "鐮鼬")
       define3(90, "鼠幫嘍囉")
@@ -84,6 +87,7 @@ class AK
       define3(355, "戰輪")
 
       define(104, 119, "娜塔莉奈浮+電氣石勾玉")
+      define(106, 119, "西維亞+電氣石勾玉")
       define(799, 119, "長髮公主的頭髮[夏]+電氣石勾玉")
       define(350, 119, "風車+電氣石勾玉")
       define(355, 119, "戰輪+電氣石勾玉")
@@ -115,10 +119,11 @@ class AK
         json -= meterialItmes
       
         while !targetItems.empty? && !meterialItmes.empty?
-          mergedCount += mergeCard(
+          merge_with_materials(
             targetItems.pop['inventory_monster_id'],
             [ meterialItmes.pop['inventory_monster_id'] ]
           )
+          mergedCount += 1
         end
   
         json += targetItems
@@ -145,7 +150,8 @@ class AK
     mergedCount = 0
     materialItems -= mt
     while mt.count >= 4
-      mergedCount += mergeCard(mt.pop['inventory_monster_id'], mt.pop(3).map{|item| item['inventory_monster_id']})
+      merge_with_materials(mt.pop['inventory_monster_id'], mt.pop(3).map{|item| item['inventory_monster_id']})
+      mergedCount += 3
     end
     materialItems += mt
   
@@ -154,19 +160,19 @@ class AK
 
   # 合并卡牌
   # 输入卡牌ID
-  # 返回被吸收的卡牌数
-  def mergeCard(main, materialArray)
+  # 返回升级后的级数目
+  def merge_with_materials(main, materialArray)
     response = request("/app.php?_c=merge&action=merge_bulk&base_inventory_monster_id=#{main}&material_inventory_monster_ids[]=#{materialArray.join("&material_inventory_monster_ids[]=")}")
     
     if response[:raw][/<title>merge merge_bulk - ayakashi<\/title>/]
       html = response[:html]
-      html.css('#level-up-text span.st').each {|tag|
-        print "#{tag.content} "
-      }
-      materialArray.count
+      level_tag = html.css('#level-up-text span.st').first
+      level = level_tag.content
+      print "#{level} "
+      return level
     else
       print "x "
-      0
+      -1
     end
   end
   
