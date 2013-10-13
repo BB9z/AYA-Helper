@@ -69,8 +69,9 @@ class AK
       retry_count -= 1
       retry
       
-    rescue Zlib::BufError
+    rescue Errno::ENOTCONN, Zlib::BufError
       sleep(2)
+      self.http = nil
       retry
       
     rescue HTTPInternalServerError
