@@ -7,14 +7,12 @@ class AK
     
     begin
       all_monsters = fetch_monsters
-      log "所有式神共计 #{all_monsters.count}"
     
-      
       monster_needs_upgrade = all_monsters.select {|m|
         !m.max_level? && m.rarity >= 3 && m.is_not_use_material
       }
       
-      log "需要升级的"
+      log "需要升级的式神："
       monster_needs_upgrade.each {|item|
         puts item.to_s(1)
       }
@@ -23,34 +21,38 @@ class AK
       material_pool.select! {|m|
         m.level >=5 && m.level <=8 && m.rarity < 3 && !m.is_not_use_material
       }
-      log "式神共计 #{material_pool.count}"
+      # log "材料式神共计 #{material_pool.count}"
       
-      
-      
-      
-      exit
+      monster_needs_upgrade.each {|m|
+        ct_attribute = m.attribute
+        
+        ct_materials = material_pool.select {|material|
+          material.attribute == ct_attribute
+        }
+        
+        if ct_materials.empty?
+          log "没有材料可以强化 #{m.name}，跳过"
+        else
+          log "强化 #{m.name} 中"
+          material_pool -= ct_materials
+          
+          # log "当前材料 #{ct_materials}"
+          m_level_should_be = m.rarity * 10 + 20
+          ct_level = m.level
+          ct_id = m.inventory_id
+          
+          while ct_level < m_level_should_be && !ct_materials.empty?
+            ct_level = merge_with_materials(ct_id, [ct_materials.pop.inventory_id]).to_i
+          end
+          
+          material_pool += ct_materials
+        end
+      }
   
     rescue => e
       puts e.inspect
       puts e.backtrace
     end
-  
-  
-    
-    monsters = monsters.sort {|a, b|
-      if a.rarity != b.rarity
-        return +1 if a.rarity > b.rarity
-        return -1
-      end
-    }
-    
-    return if up_monsters.empty?
-  
-    reday_materials = monsters.select {|m|
-      m.level >=5 && m.level <=8 && m.rarity < 3 && !m.is_not_use_material
-    }
-    p reday_materials
-    monsters -= reday_materials
   end
   
   def get_merge_rule
