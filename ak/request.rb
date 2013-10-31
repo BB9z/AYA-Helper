@@ -56,6 +56,8 @@ class AK
       # p response.body
       
       raise HTTPInternalServerError if response.is_a? Net::HTTPInternalServerError
+      raise HTTPInternalServerError if response.is_a? Net::HTTPServiceUnavailable
+      raise RequestError if response.is_a? NilClass
       
     rescue SocketError, Errno::ENETUNREACH, Errno::EADDRNOTAVAIL, Errno::EHOSTUNREACH
       log "网络错误，重试"
@@ -94,7 +96,8 @@ class AK
       end
     end
     
-    log "请求状态不正常 #{uri} #{response}" if !response.is_a? Net::HTTPOK
+    log "请求状态不正常 #{uri} #{response.class}" if !response.is_a? Net::HTTPOK
+    return nil if response.nil?
     
     content = response.body.force_encoding('UTF-8')
     retuen_value = {

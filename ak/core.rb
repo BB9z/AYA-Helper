@@ -19,6 +19,7 @@ require_relative 'user.rb'
 
 class AK
   attr_accessor :user_default
+  attr_accessor :cannot_merge_any_more
 
   def initialize(config = {})
     Encoding.default_external = Encoding::UTF_8
@@ -34,7 +35,7 @@ class AK
     
     @userAgent = "Mozilla/5.0 (iPad; CPU OS 6_1 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Mobile/10B141 ZyngaBundleIdentifier/com.zynga.zjayakashi.0 ZyngaBundleVersion/1.9.0"
     
-    @cannot_merge_any_more = false
+    @cannot_merge_any_more = true
     
     user_info = @user_default[:user]
     @user = User.new(self, user_info)

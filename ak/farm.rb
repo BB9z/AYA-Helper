@@ -49,7 +49,7 @@ class Farm
   def farm(island_id = 3, area_id = 8, stage_id = 11)
     json = @core.request("/app.php?_c=adventure&action=proceed&island_id=#{island_id}&area_id=#{area_id}&stage_id=#{stage_id}", {
       "Accept" => 'application/json'
-    })[:json]
+    }, nil, @one_way_mode)[:json]
     @core.user.update_with_stage_info(json)
     
     events = json["events"]
@@ -71,12 +71,12 @@ class Farm
       
         if monster["wasSold"]
           log "卖出#{monster_name}"
-          if !@cannot_merge_any_more
-              @cannot_merge_any_more = true if @core.merge() == 0
+          if !@core.cannot_merge_any_more
+              @core.cannot_merge_any_more = true if @core.merge() == 0
           end
         else
           log "获得#{monster_name}"
-          @cannot_merge_any_more = false
+          @core.cannot_merge_any_more = false
         end
     
       when "ENCOUNTER_OTHER_PLAYER"
