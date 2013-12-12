@@ -36,7 +36,7 @@ class Farm
     
         break if @farm_count == 0
         @farm_count -= 1 if @farm_count > 0
-    
+        sleep(0.5)
         sleep(@farm_interval)
       end
     rescue Interrupt

@@ -9,7 +9,7 @@ class AK
       all_monsters = fetch_monsters
     
       monster_needs_upgrade = all_monsters.select {|m|
-        !m.max_level? && m.rarity >= 3 && m.is_not_use_material
+        !m.max_level? && m.rarity >= 1 && m.is_not_use_material
       }
       
       log "需要升级的式神："
@@ -72,8 +72,10 @@ class AK
       define( 90, 116, "鼠幫嘍囉+黑曜石勾玉")
 
       define(105, 113, "山崎烝+水晶勾玉")
+      define(153, 113, "藍天使+水晶勾玉")
       define(154, 113, "九天玄女+水晶勾玉")
       define(270, 113, "領航員克拉克+水晶勾玉")
+      define(327, 113, "水手雪莉+水晶勾玉")
       define(351, 113, "朝食+水晶勾玉")
       define(352, 113, "午食+水晶勾玉")
       define(353, 113, "晚食+水晶勾玉")

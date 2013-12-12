@@ -16,8 +16,8 @@ class AK
 
       menu.choice("用户信息查看") {
         clear_screen
-        p @user.offense_guts
-        # @user.fetch_info
+        @user.fetch_info
+        @user.display_info
         pause
       }
       

@@ -3,7 +3,6 @@
 class AK
   
 
-
 class EventTower
   
   attr_accessor :evid
@@ -26,178 +25,59 @@ class EventTower
     raise if !master
     
     @core = master
-    @evid = 28
+    @evid = 35
     @island_id = 1
     @item_flag = 0
     
     @team_leader_default = 1365
-    
+
     @encounter_battle_rule = {
-      "10821" => {
-        "name" => "兔子兵",
-        "defense" => 10523,
+      "10966" => {
+        "name" => "自动跳舞机",
+        "defense" => 0,
         "resign" => true,
-        "team" => [],
-        "guts" => 36
+        "team" => [18259, 10091, 10123, 10089, 10369],
+        "guts" => 28
       },
-      "10822" => {
-        "name" => "竹林",
-        "defense" => 13422,
+      "10967" => {
+        "name" => "壁花",
+        "defense" => 0,
         "resign" => true,
-        "team" => [],
-        "guts" => 42
+        "team" => [14091, 10091, 10123, 10089, 10369],
+        "guts" => 35
       },
-      "10823" => {
-        "name" => "兔子火箭筒",
-        "defense" => 29295,
+      "10970" => {
+        "name" => "悟",
+        "defense" => 0,
         "resign" => true,
-        "team" => [3834, 2871, 7349, 10092, 10057],
-        "guts" => 63
+        "team" => [11374, 14091, 10857, 8400, 10369],
+        "guts" => 100
       },
-      "10824" => {
-        "name" => "流浪的吉他手",
-        "defense" => 41983,
+      "10971" => {
+        "name" => "鹿鳴館",
+        "defense" => 0,
         "resign" => true,
-        "team" => [8404, 3834, 7349, 10092, 10057],
-        "guts" => 76
+        "team" => [3834, 11374, 14128, 10123, 10089],
+        "guts" => 95
       },
-      "10825" => {
-        "name" => "大納言大伴御行",
-        "defense" => 54124,
+      "10968" => {
+        "name" => "緊那羅",
+        "defense" => 0,
         "resign" => false,
-        "team" => [10614, 8404, 3834, 3535, 7349],
-        "guts" => 117
+        "team" => [20188, 10614, 11374, 8392, 14091],
+        "guts" => 158
       },
-      "10826" => {
-        "name" => "蓬萊的玉之枝",
-        "defense" => 80000,
+      "10969" => {
+        "name" => "男",
+        "defense" => 0,
         "resign" => false,
-        "team" => [2718, 8404, 3834, 10823, 3774],
-        "guts" => 152
-      },
-      "10827" => {
-        "name" => "超級滿月",
-        "defense" => 138000,
-        "resign" => false,
-        "team" => [],
-        "guts" => 153
-      },
-      "10828" => {
-        "name" => "時之帝",
-        "defense" => 142000,
-        "resign" => false,
-        "team" => [],
-        "guts" => 153
+        "team" => [20188, 10614, 17698, 8392, 14091],
+        "guts" => 164
       }
     }
-    
-    # 兔子
-    # 3834 10823 10057 7349 3291
-    
-    # 吉他
-    # 8404 3834 10823 10057 7349
-    
-    329751814
-    
+        
     @battle_rule = {
-      "70" => {
-        "name" => "稚鳥",
-        "defense" => 6477,
-        "team" => [7349, 10092, 10057, 1116, 3291],
-        "guts" => 30
-      },
-      "75" => {
-        "name" => "稚鳥",
-        "defense" => 12165,
-        "team" => [2871, 7349, 10092, 10057, 1116],
-        "guts" => 41
-      },
-      "80" => {
-        "name" => "桃太郎",
-        "defense" => 1500,
-        "team" => [7349, 10092, 10057, 1116, 3291],
-        "guts" => 41
-      },
-      "85" => {
-        "name" => "桃太郎",
-        "defense" => 2211,
-        "team" => [],
-        "guts" => 0
-      },
-      "90" => {
-        "name" => "桃太郎",
-        "defense" => 3633,
-        "team" => [],
-        "guts" => 0
-      },
-      "95" => {
-        "name" => "桃太郎",
-        "defense" => 6477,
-        "team" => [],
-        "guts" => 0
-      },
-      "100" => {
-        "name" => "桃太郎",
-        "defense" => 12165,
-        "team" => [10330, 7349, 10092, 10057, 1116],
-        "guts" => 48
-      },
-      "110" => {
-        "name" => "讃岐造",
-        "defense" => 3200,
-        "team" => [7349, 1116, 3291, 10092, 10057],
-        "guts" => 30
-      },
-      "120" => {
-        "name" => "讃岐造",
-        "defense" => 4716,
-        "team" => [7349, 1116, 3291, 10092, 10057],
-        "guts" => 30
-      },
-      "130" => {
-        "name" => "讃岐造",
-        "defense" => 7748,
-        "team" => [7349, 1116, 3291, 10092, 10057],
-        "guts" => 30
-      },
-      "140" => {
-        "name" => "讃岐造",
-        "defense" => 13812,
-        "team" => [3832, 7349, 1161, 3291, 10092],
-        "guts" => 41
-      },
-      "150" => {
-        "name" => "讃岐造",
-        "defense" => 32000,
-        "team" => [1365, 4371, 8400, 10123, 10089],
-        "guts" => 45
-      },
-      "160" => {
-        "name" => "月兔姫",
-        "defense" => 4800,
-        "team" => [7349, 1116, 3291, 10092, 10057],
-        "guts" => 30
-      },
-      "170" => {
-        "name" => "月兔姫",
-        "defense" => 7074,
-        "team" => [7349, 1116, 3291, 10092, 10057],
-        "guts" => 30
-      },
-      "180" => {
-        "name" => "月兔姫",
-        "defense" => 11622,
-        "team" => [8404, 7349, 1161, 3291, 10092],
-        "guts" => 36
-      },
-      "190" => {
-        "name" => "月兔姫",
-        "defense" => 20718
-      },
-      "200" => {
-        "name" => "月兔姫",
-        "defense" => 48000
-      }
+      
     }
   end
   
@@ -211,7 +91,7 @@ class EventTower
     
     case html.title
     when "ExtraQuestEventAdventure stage - ayakashi"
-      p html
+      # p html
       @stage = html.css("#stage-name").first.content.to_i
       log "当前处于 #{@stage} 层"
   
@@ -224,7 +104,7 @@ class EventTower
       end
     
     when "extra_quest_event_negotiation found - ayakashi"
-      p response[:url]
+      # p response[:url]
       p @monster_id
       p @encounter_battle_mode
       
@@ -334,6 +214,12 @@ class EventTower
     log "重定向事件 #{event}"
     uri = event["values"]["url"]
     @monster_id = uri[/battle_id=(\d+)/, 1].to_i
+    if (uri[/encounter_battle_mode=1/])
+      @encounter_battle_mode = true
+    else
+      @encounter_battle_mode = false
+    end
+    log "line 202: @encounter_battle_mode = #{@encounter_battle_mode}"
     return fight()
   end
   
@@ -373,7 +259,7 @@ class EventTower
   end # run
   
   def fight(monster_id = @monster_id)
-    if monster_id >= 11800
+    if monster_id >= 11800 && monster_id < 100000
       log "朵拉 交换铺"
       log "TODO：结果与交涉识别"
       pause
@@ -384,42 +270,26 @@ class EventTower
       @stage = ask("现在是多少层？", Integer)
     end
     
-    @encounter_battle_mode = (monster_id > 20000)? false : true
-    p monster_id
-    p @encounter_battle_mode
-    point = @core.user.offense_guts
-    log "@stage = #{@stage} 还有攻灵：#{point}"
+    @encounter_battle_mode = (monster_id > 100000)? false : true
+    log "@encounter_battle_mode= #{@encounter_battle_mode}"
+    log "@stage = #{@stage} 还有攻灵：#{@core.user.offense_guts}"
     
     if @encounter_battle_mode
       info = @encounter_battle_rule[monster_id.to_s]
-      p info
+      log "info = #{info}"
       log "遭遇 #{info["name"]}，防：#{info["defense"]}"
     else
       @stage += (5 - @stage%5) unless @stage%5    # 向上取道5的倍数
       p @stage.to_s
       info = @battle_rule[@stage.to_s]
-      p info
+      log "info = #{info}"
       log "守卫 #{info["name"]}，防：#{info["defense"]}"
     end
     
-    if @auto_mode
-      log "选择攻击组 #{info["team"]} 需要灵力 #{info["guts"]}"
-      minute_to_wait = info["guts"] - point
-      
-      if minute_to_wait > 0
-        log "需要 #{minute_to_wait}m 恢复"
-        sleep(minute_to_wait*60)
-      end
-      
-      @core.set_offense_team(info["team"])
-      speak("Fight")
-    else
-      speak("Ready fight?")
-      pause("按任意键开打")
-    end
+    fight_get_ready(info)
     
     flag = @encounter_battle_mode? 1 : 0
-     @core.request("/app.php?target_user_id=#{monster_id}&evid=#{evid}&encounter_battle_mode=#{flag}&_c=extra_quest_event_npc_battle&action=exec_battle", nil, "执行战斗", true)
+     html = @core.request("/app.php?target_user_id=#{monster_id}&evid=#{evid}&encounter_battle_mode=#{flag}&_c=extra_quest_event_npc_battle&action=exec_battle", nil, "执行战斗", true)
     
     get_battle_result(@encounter_battle_mode)
     @core.set_team_leader(@team_leader_default)
@@ -431,8 +301,36 @@ class EventTower
       return true
     else
       # TODO: 交涉页面分析
+      log "line 288: 交涉页面分析"
+      p html
       log "看看能否操作"
       return false
+    end
+  end
+  
+  # 切换攻组，等待回灵
+  def fight_get_ready(info)
+    minute_to_wait = info["guts"] - @core.user.offense_guts
+    
+    if @auto_mode
+      log "选择攻击组 #{info["team"]} 需要灵力 #{info["guts"]}"
+      
+      if minute_to_wait > 0
+        log "需要 #{minute_to_wait}m 恢复"
+        sleep(minute_to_wait*60)
+      end
+      
+      @core.set_offense_team(info["team"])
+      speak("Fight")
+    else
+      if agree("切换攻击组？")
+        @core.set_offense_team(info["team"])
+      end
+      
+      log "提示：需要 #{minute_to_wait}m 恢复"
+      
+      speak("Ready fight?")
+      pause("按任意键开打")
     end
   end
   
