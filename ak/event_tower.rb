@@ -29,48 +29,48 @@ class EventTower
     @island_id = 1
     @item_flag = 0
     
-    @team_leader_default = 1365
+    @team_leader_default = 10369
 
     @encounter_battle_rule = {
       "10966" => {
         "name" => "自动跳舞机",
         "defense" => 0,
-        "resign" => true,
+        "resign" => false,
         "team" => [18259, 10091, 10123, 10089, 10369],
         "guts" => 28
       },
       "10967" => {
         "name" => "壁花",
         "defense" => 0,
-        "resign" => true,
+        "resign" => false,
         "team" => [14091, 10091, 10123, 10089, 10369],
         "guts" => 35
       },
       "10970" => {
         "name" => "悟",
         "defense" => 0,
-        "resign" => true,
+        "resign" => false,
         "team" => [11374, 14091, 10857, 8400, 10369],
         "guts" => 100
       },
       "10971" => {
         "name" => "鹿鳴館",
         "defense" => 0,
-        "resign" => true,
+        "resign" => false,
         "team" => [3834, 11374, 14128, 10123, 10089],
         "guts" => 95
       },
       "10968" => {
         "name" => "緊那羅",
         "defense" => 0,
-        "resign" => false,
+        "resign" => true,
         "team" => [20188, 10614, 11374, 8392, 14091],
         "guts" => 158
       },
       "10969" => {
         "name" => "男",
         "defense" => 0,
-        "resign" => false,
+        "resign" => true,
         "team" => [20188, 10614, 17698, 8392, 14091],
         "guts" => 164
       }
@@ -160,7 +160,7 @@ class EventTower
     
       when "NO_ENOUGH_ENERGY"
         log "体力消耗光了"
-        speak("NO ENOUGH ENERGY")
+        sound_alert("NO ENOUGH ENERGY")
         @item_flag = 0
         exit unless @auto_mode
     
@@ -185,7 +185,7 @@ class EventTower
 
       when "LEVEL_UP"
         log "升级了～"
-        speak("LEVEL UP")
+        sound_alert("LEVEL UP")
 
       else
         log "未处理的类别 #{event}"
@@ -321,7 +321,7 @@ class EventTower
       end
       
       @core.set_offense_team(info["team"])
-      speak("Fight")
+      sound_alert("Fight")
     else
       if agree("切换攻击组？")
         @core.set_offense_team(info["team"])
@@ -329,7 +329,7 @@ class EventTower
       
       log "提示：需要 #{minute_to_wait}m 恢复"
       
-      speak("Ready fight?")
+      sound_alert("Ready fight?")
       pause("按任意键开打")
     end
   end
@@ -342,12 +342,12 @@ class EventTower
     
     if html[/id="tit-won"/].nil?
       log "战斗失败"
-      speak("You lost")
+      sound_alert("You lost")
       return false
       
     else
       log "战斗胜利"
-      speak("You win")
+      sound_alert("You win")
       return true
       
     end

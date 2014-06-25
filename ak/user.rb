@@ -34,6 +34,8 @@ class User
     puts "攻灵: #{@info["offense_guts"]}/#{@info["offense_guts_max"]} 防御灵: #{@info["defense_guts"]}/#{@info["defense_guts_max"]} 体力: #{@info["energy"]}/#{@info["energy_max"]}"
     puts "未分配点数: #{@info["ability_point"]}" if @info["ability_point"] != 0
     puts "胜: #{@info["total_won"]} 败: #{@info["total_lost"]} 胜率: #{(Float(@info["total_won"])/(@info["total_lost"]+@info["total_won"])*100).round(1)}% 解放数: #{@info["completed_parts_count"]}"
+    puts "金: #{@info["cash"]} 白银: #{@info["coin"]} 召唤点数: #{@info["gacha_point"]}"
+    puts "好友: #{@info["neighbors_count"]}/#{@info["neighbors_limit_count"]}"
   end
   
   def save_info

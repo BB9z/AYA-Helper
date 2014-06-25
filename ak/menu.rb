@@ -142,9 +142,20 @@ class AK
         pause
       }
 
-      menu.choices("工会留言板") {
+      menu.choices("公会留言板") {
         clear_screen
         talk 5
+        pause
+      }
+      
+      menu.choices("捐献公会") {
+        clear_screen
+        pause
+      }
+      
+      menu.choices("戳好友") {
+        clear_screen
+        touch_friends
         pause
       }
       

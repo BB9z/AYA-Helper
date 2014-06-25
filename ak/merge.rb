@@ -27,7 +27,8 @@ class AK
         ct_attribute = m.attribute
         
         ct_materials = material_pool.select {|material|
-          material.attribute == ct_attribute
+          true
+          # material.attribute == ct_attribute
         }
         
         if ct_materials.empty?
@@ -59,9 +60,9 @@ class AK
     return @merge_rule if @merge_rule
     
     @merge_rule = MergeRule.new {
-      define3(89, "反枕")
-      define3(91, "鐮鼬")
-      define3(90, "鼠幫嘍囉")
+      # define3(89, "反枕")
+      # define3(91, "鐮鼬")
+      # define3(90, "鼠幫嘍囉")
 
       define(  2, 116, "管狐+黑曜石勾玉")
       define( 15, 116, "雪童子+黑曜石勾玉")
@@ -79,6 +80,7 @@ class AK
       define(351, 113, "朝食+水晶勾玉")
       define(352, 113, "午食+水晶勾玉")
       define(353, 113, "晚食+水晶勾玉")
+      define(361, 113, "紅天使+水晶勾玉")
       define(362, 113, "黑天使+水晶勾玉")
 
       define(  1, 113, "天鈿女命+水晶勾玉")
@@ -98,6 +100,14 @@ class AK
       define(799, 119, "長髮公主的頭髮[夏]+電氣石勾玉")
       define(350, 119, "風車+電氣石勾玉")
       define(355, 119, "戰輪+電氣石勾玉")
+      
+      define( 89, 116, "爬塔：反枕")
+      define( 91, 116, "爬塔：鐮鼬")
+      define(102, 119, "爬塔：飛鏢女")
+      define(103, 119, "爬塔：手指虎")
+      define3(89, "反枕")
+      define3(91, "鐮鼬")
+      define3(90, "鼠幫嘍囉")
     }
   end
   
@@ -130,6 +140,7 @@ class AK
             targetItems.pop['inventory_monster_id'],
             [ meterialItmes.pop['inventory_monster_id'] ]
           )
+          sleep(0.5)
           mergedCount += 1
         end
   

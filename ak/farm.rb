@@ -1,4 +1,4 @@
-# 
+#
 
 class AK
   
@@ -36,7 +36,7 @@ class Farm
     
         break if @farm_count == 0
         @farm_count -= 1 if @farm_count > 0
-        sleep(0.5)
+        sleep(0.6)
         sleep(@farm_interval)
       end
     rescue Interrupt
@@ -62,10 +62,10 @@ class Farm
       case event["type"]
       when "NO_ENOUGH_ENERGY"
         log "体力消耗光了"
-        speak("NO ENOUGH ENERGY")
+        @core.sound_alert("NO ENOUGH ENERGY")
         @should_continue_run = false if @one_way_mode
     
-      when "GET_MONSTER"      
+      when "GET_MONSTER"
         monster = event["values"]["settings"]["monster"]
         monster_name = monster["name"]
       
@@ -87,11 +87,11 @@ class Farm
     
       when "LEVEL_UP"
         log "升级了～"
-        speak("LEVEL UP")
+        @core.sound_alert("LEVEL UP")
     
       else
         log "未处理的类别 #{event}"
-        speak("Unknow type")
+        @core.sound_alert("Unknow type")
         @should_continue_run = false if @one_way_mode
       end
     }

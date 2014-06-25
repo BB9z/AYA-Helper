@@ -7,6 +7,7 @@ require_relative 'event_tower.rb'
 require_relative 'event_pvp.rb'
 require_relative 'event.rb'
 require_relative 'farm.rb'
+require_relative 'friends.rb'
 require_relative 'guild.rb'
 require_relative 'menu.rb'
 require_relative 'merge_rule.rb'
@@ -76,6 +77,6 @@ class AK
   end
   
   def sound_alert(string)
-    speak(string) if @sound_alert
+    sound_alert(string) if @sound_alert
   end
 end

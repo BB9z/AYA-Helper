@@ -40,7 +40,7 @@ class AK
     
     begin
       if retry_count == 0
-        speak("Network down")
+        sound_alert("Network down")
         raise RequestError, "无法建立连接"
       end
       
